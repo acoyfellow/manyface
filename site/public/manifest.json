@@ -1,0 +1,10 @@
+{
+  "name": "manyface",
+  "short_name": "manyface",
+  "description": "Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1118",
+  "theme_color": "#0b1118",
+  "icons": []
+}

@@ -1,0 +1,795 @@
+{
+  "schema": "proof-spec/v0",
+  "tournamentId": "demo-1783361238874",
+  "claim": "Sort an array of numbers in ascending order.",
+  "winnerId": "correct-sort",
+  "assertions": [
+    {
+      "id": "gate-deterministic",
+      "claim": "The gate produced the same verdict order when inputs are identical",
+      "result": "pass",
+      "evidence": {
+        "verdictOrder": [
+          "correct-sort",
+          "broken-sort",
+          "reverse-sort",
+          "eloquent-partial"
+        ]
+      }
+    },
+    {
+      "id": "winner-on-proof",
+      "claim": "The winner passed every self-test and every counterexample",
+      "result": "pass",
+      "evidence": {
+        "artifactId": "correct-sort",
+        "candidateId": "correct-sort",
+        "passed": true,
+        "selfTestsPassed": 2,
+        "selfTestsTotal": 2,
+        "counterexamplesPassed": 6,
+        "counterexamplesTotal": 6,
+        "failures": [],
+        "score": 1
+      }
+    },
+    {
+      "id": "losers-retained",
+      "claim": "Every losing artifact is retained with its failure evidence",
+      "result": "pass",
+      "evidence": {
+        "retainedCount": 4
+      }
+    }
+  ],
+  "evidence": {
+    "verdicts": [
+      {
+        "artifactId": "correct-sort",
+        "candidateId": "correct-sort",
+        "passed": true,
+        "selfTestsPassed": 2,
+        "selfTestsTotal": 2,
+        "counterexamplesPassed": 6,
+        "counterexamplesTotal": 6,
+        "failures": [],
+        "score": 1
+      },
+      {
+        "artifactId": "broken-sort",
+        "candidateId": "broken-sort",
+        "passed": false,
+        "selfTestsPassed": 1,
+        "selfTestsTotal": 1,
+        "counterexamplesPassed": 1,
+        "counterexamplesTotal": 6,
+        "failures": [
+          {
+            "testId": "cx-single",
+            "kind": "counterexample",
+            "input": [
+              42
+            ],
+            "expected": [
+              42
+            ],
+            "actual": []
+          },
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              -1,
+              0,
+              5
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              -2,
+              0,
+              3,
+              7
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          }
+        ],
+        "score": 0.2857142857142857
+      },
+      {
+        "artifactId": "reverse-sort",
+        "candidateId": "reverse-sort",
+        "passed": false,
+        "selfTestsPassed": 1,
+        "selfTestsTotal": 1,
+        "counterexamplesPassed": 2,
+        "counterexamplesTotal": 6,
+        "failures": [
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              5,
+              0,
+              -1,
+              -3
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              10,
+              7,
+              3,
+              0,
+              -2
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          }
+        ],
+        "score": 0.42857142857142855
+      },
+      {
+        "artifactId": "eloquent-partial",
+        "candidateId": "eloquent-partial",
+        "passed": false,
+        "selfTestsPassed": 1,
+        "selfTestsTotal": 1,
+        "counterexamplesPassed": 2,
+        "counterexamplesTotal": 6,
+        "failures": [
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              -3,
+              0,
+              5,
+              -1
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ]
+          }
+        ],
+        "score": 0.42857142857142855
+      }
+    ],
+    "retained": [
+      {
+        "candidateId": "correct-sort",
+        "codeRef": "correctSort",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "candidateId": "broken-sort",
+        "codeRef": "brokenSort",
+        "passed": false,
+        "failures": [
+          {
+            "testId": "cx-single",
+            "kind": "counterexample",
+            "input": [
+              42
+            ],
+            "expected": [
+              42
+            ],
+            "actual": []
+          },
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              -1,
+              0,
+              5
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              -2,
+              0,
+              3,
+              7
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "candidateId": "reverse-sort",
+        "codeRef": "reverseSort",
+        "passed": false,
+        "failures": [
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              5,
+              0,
+              -1,
+              -3
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              10,
+              7,
+              3,
+              0,
+              -2
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "candidateId": "eloquent-partial",
+        "codeRef": "eloquentPartial",
+        "passed": false,
+        "failures": [
+          {
+            "testId": "cx-duplicates",
+            "kind": "counterexample",
+            "input": [
+              2,
+              2,
+              1,
+              1
+            ],
+            "expected": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "actual": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "testId": "cx-negatives",
+            "kind": "counterexample",
+            "input": [
+              -3,
+              0,
+              5,
+              -1
+            ],
+            "expected": [
+              -3,
+              -1,
+              0,
+              5
+            ],
+            "actual": [
+              -3,
+              0,
+              5,
+              -1
+            ]
+          },
+          {
+            "testId": "cx-mixed",
+            "kind": "counterexample",
+            "input": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ],
+            "expected": [
+              -2,
+              0,
+              3,
+              7,
+              10
+            ],
+            "actual": [
+              10,
+              -2,
+              7,
+              0,
+              3
+            ]
+          },
+          {
+            "testId": "cx-large",
+            "kind": "counterexample",
+            "input": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ],
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              1,
+              8,
+              2,
+              7,
+              3,
+              6,
+              4,
+              5,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "costUsd": 0,
+  "createdAt": "2026-07-06T18:07:18.876Z"
+}

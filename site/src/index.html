@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="manyface — race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <meta name="theme-color" content="#0b1118" />
+    <meta property="og:title" content="manyface — adversarial parallel synthesis" />
+    <meta property="og:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://manyface.coey.dev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="manyface — adversarial parallel synthesis" />
+    <meta name="twitter:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <link rel="canonical" href="https://manyface.coey.dev" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>manyface — adversarial parallel synthesis</title>
+    <style>
+      :root {
+        --ink: #0b1118; --layer: #111a24; --layer-2: #182431;
+        --text: #f7f9fb; --muted: #9baaba;
+        --orange: #f6821f; --amber: #f7b53b;
+        --blue-light: #71b8d8; --green: #63d5a2; --red: #ff7d68;
+        --border: rgba(174,196,216,.14);
+        --radius-sm: .25rem; --radius-md: .45rem; --radius-lg: .7rem;
+      }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 800; src: local('Inter'); }
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400 700; src: local('IBM Plex Mono'); }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--ink); color: var(--text);
+        min-height: 100vh; line-height: 1.6;
+      }
+      .eyebrow {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+        color: var(--muted); margin-bottom: .5rem;
+      }
+      .eyebrow::before { content: '['; }
+      .eyebrow::after { content: ']'; }
+      .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+      h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: .5rem; }
+      h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.03em; margin-top: 2rem; margin-bottom: .5rem; color: var(--orange); }
+      p, li { color: var(--muted); margin-bottom: .75rem; }
+      a { color: var(--blue-light); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .gate { margin-top: 2rem; padding: 1.25rem; background: var(--layer); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+      .gate h3 { font-family: 'IBM Plex Mono', monospace; font-size: .875rem; color: var(--amber); margin-bottom: .75rem; }
+      .verdict { display: flex; justify-content: space-between; align-items: center; padding: .5rem .75rem; margin-bottom: .25rem; background: var(--layer-2); border-radius: var(--radius-sm); font-family: 'IBM Plex Mono', monospace; font-size: .8125rem; }
+      .verdict .pass { color: var(--green); }
+      .verdict .fail { color: var(--red); }
+      .verdict .score { color: var(--muted); }
+      .badge { display: inline-block; padding: .125rem .5rem; border-radius: var(--radius-sm); font-size: .6875rem; font-weight: 700; text-transform: uppercase; }
+      .badge.winner { background: var(--green); color: var(--ink); }
+      .badge.none { background: var(--red); color: var(--text); }
+      .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: .8125rem; color: var(--muted); }
+      .btn {
+        display: inline-block; padding: .5rem 1rem; background: var(--orange);
+        color: var(--ink); font-weight: 700; border: none; border-radius: var(--radius-md);
+        cursor: pointer; font-size: .875rem;
+      }
+      .btn:hover { opacity: .9; }
+      .btn:disabled { opacity: .4; cursor: not-allowed; }
+      .receipt-link { font-family: 'IBM Plex Mono', monospace; font-size: .8125rem; }
+      pre { font-family: 'IBM Plex Mono', monospace; font-size: .75rem; background: var(--layer); padding: 1rem; border-radius: var(--radius-md); overflow-x: auto; margin-top: .75rem; border: 1px solid var(--border); }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="eyebrow">manyface</div>
+      <h1>adversarial parallel synthesis</h1>
+      <p>Race incompatible builders and hostile reviewers in isolation. The first artifact to survive the shared proof graph wins. Losers keep their failure receipts so nothing useful is thrown away.</p>
+
+      <div class="gate">
+        <h3>run a tournament</h3>
+        <p style="font-size:.875rem;margin-bottom:1rem">Launches 4 sorting candidates against 3 adversarial reviewers. The gate scores every artifact deterministically.</p>
+        <button class="btn" id="runBtn">run tournament</button>
+        <div id="status" style="margin-top:.75rem;font-family:'IBM Plex Mono',monospace;font-size:.8125rem;color:var(--muted)"></div>
+        <div id="results" style="margin-top:1rem"></div>
+        <div id="receipt" style="margin-top:1rem"></div>
+      </div>
+
+      <h2>how it works</h2>
+      <pre>claim
+ ├─ Candidate A  (isolated cell) ──> artifact + self-tests
+ ├─ Candidate B  (isolated cell) ──> artifact + self-tests
+ ├─ Candidate C  (isolated cell) ──> artifact + self-tests
+ └─ Adversary 1/2/3 ──> counterexamples
+
+        deterministic gate
+         pass / fail on every pair
+            |
+      winner (proof bundle)
+      losers (retained with counterexamples)</pre>
+
+      <h2>load-bearing primitives</h2>
+      <ul>
+        <li><strong>Workflow</strong> — durable tournament lifecycle</li>
+        <li><strong>Queues</strong> — fan-out for candidates and adversaries</li>
+        <li><strong>Durable Object + SQLite</strong> — event-sourced tournament state</li>
+        <li><strong>AI Gateway</strong> — model routing and per-role policy</li>
+        <li><strong>Containers / Sandbox</strong> — isolated candidate execution cells</li>
+        <li><strong>R2</strong> — immutable artifacts, counterexamples, and receipts</li>
+      </ul>
+
+      <h2>proof</h2>
+      <p>Run <code>bun test</code> locally or click the button above. A machine-readable receipt is written to <code>proof/example-receipt.json</code>.</p>
+      <p class="receipt-link"><a href="/api/replay/demo-receipt">view latest receipt</a></p>
+
+      <div class="footer">
+        <p>MIT &mdash; <a href="https://github.com/jcoeyman/manyface">GitHub</a></p>
+      </div>
+    </div>
+
+    <script type="module">
+      const runBtn = document.getElementById('runBtn');
+      const statusEl = document.getElementById('status');
+      const resultsEl = document.getElementById('results');
+      const receiptEl = document.getElementById('receipt');
+
+      runBtn.addEventListener('click', async () => {
+        runBtn.disabled = true;
+        statusEl.textContent = 'running tournament...';
+        resultsEl.innerHTML = '';
+        receiptEl.innerHTML = '';
+
+        try {
+          const res = await fetch('/api/tournament', { method: 'POST' });
+          const data = await res.json();
+
+          statusEl.textContent = `winner: ${data.winnerId ?? 'none'}`;
+
+          let html = '';
+          for (const v of data.verdicts) {
+            const cls = v.passed ? 'pass' : 'fail';
+            html += `<div class="verdict"><span class="${cls}">${v.candidateId}</span><span class="score">${(v.score * 100).toFixed(0)}%</span></div>`;
+          }
+          resultsEl.innerHTML = html;
+
+          if (data.receipt) {
+            receiptEl.innerHTML = `<details><summary style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.8125rem;color:var(--blue-light)">view receipt</summary><pre>${JSON.stringify(data.receipt, null, 2)}</pre></details>`;
+          }
+        } catch (err) {
+          statusEl.textContent = `error: ${err.message}`;
+        } finally {
+          runBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

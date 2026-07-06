@@ -1,0 +1,32 @@
+{
+  "name": "manyface",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "demo": "bun run src/demo.ts",
+    "test": "bun test",
+    "check": "biome check . && tsc --noEmit",
+    "format": "biome format --write .",
+    "build:site": "vite build site",
+    "preview:site": "vite preview site",
+    "deploy": "echo 'Deploy is disabled in this task. Run alchemy manually when approved.' && exit 1"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "@types/node": "^26.1.0",
+    "svelte": "^5.28.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.2.0"
+  },
+  "engines": {
+    "bun": ">=1.2"
+  }
+}

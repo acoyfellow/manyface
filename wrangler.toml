@@ -1,0 +1,36 @@
+name = "manyface"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[placement]
+mode = "smart"
+
+[vars]
+ENVIRONMENT = "production"
+POLICY_PATH = "./policy.json"
+
+# R2 bucket for immutable artifacts, counterexamples, and receipts.
+[[r2_buckets]]
+binding = "ARTIFACTS"
+bucket_name = "manyface-artifacts"
+
+# Queue for contestant/adversary fan-out and fan-in.
+[[queues.producers]]
+binding = "TOURNAMENT_QUEUE"
+queue = "manyface-tournament"
+
+# Durable Object namespace for event-sourced tournament state.
+[[durable_objects.bindings]]
+name = "TOURNAMENT_DO"
+class_name = "TournamentDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["TournamentDO"]
+
+# Analytics dataset for gate metrics and cost receipts.
+[[analytics_engine_datasets]]
+binding = "GATE_METRICS"
+dataset = "manyface-gate-metrics"

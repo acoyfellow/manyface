@@ -1,0 +1,30 @@
+{
+  "$schema": "./src/policy.schema.json",
+  "maxCandidates": 12,
+  "maxAdversaries": 6,
+  "candidateBudget": {
+    "maxSelfTests": 10,
+    "maxWallMs": 5000,
+    "maxMemoryMb": 128
+  },
+  "adversaryBudget": {
+    "maxCounterexamples": 20,
+    "maxWallMs": 5000
+  },
+  "gate": {
+    "requireAllSelfTests": true,
+    "requireAllCounterexamples": true,
+    "tieBreaker": "lexical"
+  },
+  "retention": {
+    "keepLoserArtifacts": true,
+    "keepFailedCounterexamples": true,
+    "keepReceipts": true
+  },
+  "aiGateway": {
+    "defaultModel": "openai/gpt-4o-mini",
+    "candidateModels": ["openai/gpt-4o-mini", "anthropic/claude-3-haiku"],
+    "adversaryModels": ["openai/gpt-4o-mini"],
+    "costCeilingUsd": 0.5
+  }
+}
