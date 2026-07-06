@@ -3,6 +3,9 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": {
+    "ignore": ["proof", "receipts", ".guardrail", "site/dist", "dist", "node_modules"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,

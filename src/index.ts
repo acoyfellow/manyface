@@ -69,10 +69,10 @@ app.get('/api/replay/:id', async (c) => {
 });
 
 // Static site (PWA/SEO surface) served from site/dist when running locally.
-// In production on Workers, static assets are served via Cloudflare's static asset
-// integration or a separate Workers Sites deployment.
-declare const Bun: { main: boolean };
-if (Bun.main) {
+// In production on Workers, static assets are served via the [assets] binding
+// declared in wrangler.toml; the local adapter path below only runs under Bun.
+declare const Bun: { main: boolean } | undefined;
+if (typeof Bun !== 'undefined' && Bun.main) {
   const { existsSync, readFileSync } = await import('node:fs');
   const { join } = await import('node:path');
   app.get('/*', async (c) => {

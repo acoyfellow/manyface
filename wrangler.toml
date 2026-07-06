@@ -4,12 +4,22 @@ compatibility_date = "2025-06-01"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 
+# Production route for the manyface PWA.
+routes = [
+  { pattern = "manyface.coey.dev", custom_domain = true }
+]
+
 [placement]
 mode = "smart"
 
 [vars]
 ENVIRONMENT = "production"
 POLICY_PATH = "./policy.json"
+
+# Static asset delivery for the AX PWA tournament site.
+[assets]
+directory = "site/dist"
+binding = "ASSETS"
 
 # R2 bucket for immutable artifacts, counterexamples, and receipts.
 [[r2_buckets]]
@@ -30,7 +40,22 @@ class_name = "TournamentDO"
 tag = "v1"
 new_sqlite_classes = ["TournamentDO"]
 
+# Workflow for durable tournament lifecycle and checkpoints.
+[[workflows]]
+binding = "TOURNAMENT_WORKFLOW"
+name = "manyface-tournament-workflow"
+class_name = "TournamentWorkflow"
+
+# AI Gateway seam: intentionally local-only in this validated path. The binding
+# surface is reserved; production routing would use a gateway_id under [ai].
+# Local code uses the in-process AiGatewayAdapter so no live API keys are needed.
+
 # Analytics dataset for gate metrics and cost receipts.
 [[analytics_engine_datasets]]
 binding = "GATE_METRICS"
 dataset = "manyface-gate-metrics"
+
+# Containers / Worker Loader seam: intentionally local-only in this validated
+# path. The production shape keeps the binding surface reserved while the code
+# uses in-process candidate cells. Add a [[containers]] binding here when the
+# isolated execution seam is promoted to real platform cells.
