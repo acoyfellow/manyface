@@ -3,19 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="manyface — race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
-    <meta name="theme-color" content="#0b1118" />
+    <title>manyface — adversarial parallel synthesis</title>
+    <meta name="description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <meta name="theme-color" content="#f6821f" />
+    <link rel="canonical" href="https://manyface.coey.dev" />
+
     <meta property="og:title" content="manyface — adversarial parallel synthesis" />
     <meta property="og:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://manyface.coey.dev" />
+    <meta property="og:image" content="https://manyface.coey.dev/share.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="manyface" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="manyface — adversarial parallel synthesis" />
     <meta name="twitter:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
-    <link rel="canonical" href="https://manyface.coey.dev" />
+    <meta name="twitter:image" content="https://manyface.coey.dev/share.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>manyface — adversarial parallel synthesis</title>
+    <link rel="apple-touch-icon" href="/icon-192.svg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <style>
       :root {
         --ink: #0b1118; --layer: #111a24; --layer-2: #182431;
@@ -115,6 +126,10 @@
     </div>
 
     <script type="module">
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+      }
+
       const runBtn = document.getElementById('runBtn');
       const statusEl = document.getElementById('status');
       const resultsEl = document.getElementById('results');

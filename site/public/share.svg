@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b1118"/>
+  <rect x="60" y="60" width="1080" height="510" rx="20" fill="none" stroke="#f6821f" stroke-width="2" opacity=".3"/>
+  <text x="600" y="240" text-anchor="middle" fill="#f6821f" font-family="monospace" font-size="64" font-weight="bold">manyface</text>
+  <text x="600" y="300" text-anchor="middle" fill="#f7b53b" font-family="sans-serif" font-size="28" font-weight="700">adversarial parallel synthesis</text>
+  <text x="600" y="370" text-anchor="middle" fill="#9baaba" font-family="monospace" font-size="18">Race incompatible builders and hostile reviewers in isolation.</text>
+  <text x="600" y="400" text-anchor="middle" fill="#9baaba" font-family="monospace" font-size="18">The first artifact to survive the shared proof graph wins.</text>
+  <text x="600" y="490" text-anchor="middle" fill="#71b8d8" font-family="monospace" font-size="16">manyface.coey.dev</text>
+</svg>

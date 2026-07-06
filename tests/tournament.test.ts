@@ -188,4 +188,87 @@ describe('manyface', () => {
       expect(typeof elapsed).toBe('number');
     });
   });
+
+  describe('PWA surface', () => {
+    it('serves manifest.json with required installability fields', async () => {
+      const manifestPath = new URL('../site/public/manifest.json', import.meta.url);
+      const manifest = (await Bun.file(manifestPath).json()) as Record<string, unknown>;
+
+      expect(manifest.name).toBeTruthy();
+      expect(manifest.short_name).toBeTruthy();
+      expect(manifest.start_url).toBe('/');
+      expect(manifest.display).toBe('standalone');
+      expect(manifest.theme_color).toBeTruthy();
+      expect(manifest.background_color).toBeTruthy();
+      const icons = manifest.icons as Array<Record<string, string>>;
+      expect(icons.length).toBeGreaterThan(0);
+      for (const icon of icons) {
+        expect(icon.src).toBeTruthy();
+        expect(icon.sizes).toBeTruthy();
+        expect(icon.type).toBe('image/svg+xml');
+      }
+    });
+
+    it('serves service worker with expected cache name', async () => {
+      const swPath = new URL('../site/public/sw.js', import.meta.url);
+      const sw = await Bun.file(swPath).text();
+
+      expect(sw).toContain('manyface-v1');
+      expect(sw).toContain('install');
+      expect(sw).toContain('fetch');
+      expect(sw).toContain('activate');
+    });
+
+    it('registers service worker from the page HTML', async () => {
+      const htmlPath = new URL('../site/src/index.html', import.meta.url);
+      const html = await Bun.file(htmlPath).text();
+
+      expect(html).toContain("serviceWorker.register('/sw.js')");
+      expect(html).toContain('rel="manifest"');
+      expect(html).toContain('href="/manifest.json"');
+      expect(html).toContain('apple-touch-icon');
+    });
+  });
+
+  describe('SEO surface', () => {
+    it('includes title, description, canonical, og, twitter in HTML head', async () => {
+      const htmlPath = new URL('../site/src/index.html', import.meta.url);
+      const html = await Bun.file(htmlPath).text();
+
+      expect(html).toContain('<title>');
+      expect(html).toContain('meta name="description"');
+      expect(html).toContain('rel="canonical"');
+      expect(html).toContain('property="og:title"');
+      expect(html).toContain('property="og:description"');
+      expect(html).toContain('property="og:image"');
+      expect(html).toContain('property="og:url"');
+      expect(html).toContain('name="twitter:card"');
+      expect(html).toContain('name="twitter:image"');
+    });
+
+    it('serves robots.txt with sitemap reference', async () => {
+      const robotsPath = new URL('../site/public/robots.txt', import.meta.url);
+      const robots = await Bun.file(robotsPath).text();
+
+      expect(robots).toContain('User-agent: *');
+      expect(robots).toContain('Allow: /');
+      expect(robots).toContain('Sitemap:');
+    });
+
+    it('serves sitemap.xml with valid URL', async () => {
+      const sitemapPath = new URL('../site/public/sitemap.xml', import.meta.url);
+      const sitemap = await Bun.file(sitemapPath).text();
+
+      expect(sitemap).toContain('urlset');
+      expect(sitemap).toContain('manyface.coey.dev');
+    });
+
+    it('serves share SVG image', async () => {
+      const sharePath = new URL('../site/public/share.svg', import.meta.url);
+      const share = await Bun.file(sharePath).text();
+
+      expect(share).toContain('svg');
+      expect(share).toContain('manyface');
+    });
+  });
 });

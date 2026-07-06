@@ -1,6 +1,6 @@
 {
   "schema": "proof-spec/v0",
-  "tournamentId": "demo-1783361238874",
+  "tournamentId": "demo-1783367352476",
   "claim": "Sort an array of numbers in ascending order.",
   "winnerId": "correct-sort",
   "assertions": [
@@ -791,5 +791,5 @@
     ]
   },
   "costUsd": 0,
-  "createdAt": "2026-07-06T18:07:18.876Z"
+  "createdAt": "2026-07-06T19:49:12.477Z"
 }

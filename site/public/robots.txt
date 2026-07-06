@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://manyface.coey.dev/sitemap.xml

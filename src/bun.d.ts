@@ -8,5 +8,13 @@ declare module 'bun:test' {
     toBeNull(): void;
     toBeTruthy(): void;
     toBeGreaterThan(n: number): void;
+    toContain(expected: string): void;
+  };
+}
+
+declare namespace Bun {
+  function file(path: URL | string): {
+    text(): Promise<string>;
+    json(): Promise<Record<string, unknown>>;
   };
 }
