@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>manyface — adversarial parallel synthesis</title>
-    <meta name="description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <title>manyface — an AI demo that checks its own answers</title>
+    <meta name="description" content="Several AIs try different approaches to the same problem. A critic tries to break each answer. The one that survives wins." />
     <meta name="theme-color" content="#f6821f" />
     <link rel="canonical" href="https://manyface.coey.dev" />
 
-    <meta property="og:title" content="manyface — adversarial parallel synthesis" />
-    <meta property="og:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <meta property="og:title" content="manyface — an AI demo that checks its own answers" />
+    <meta property="og:description" content="Several AIs try different approaches to the same problem. A critic tries to break each answer. The one that survives wins." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://manyface.coey.dev" />
     <meta property="og:image" content="https://manyface.coey.dev/share.svg" />
@@ -19,8 +19,8 @@
     <meta property="og:site_name" content="manyface" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="manyface — adversarial parallel synthesis" />
-    <meta name="twitter:description" content="Race incompatible builders and hostile reviewers in isolation; the first artifact to survive the shared proof graph wins." />
+    <meta name="twitter:title" content="manyface — an AI demo that checks its own answers" />
+    <meta name="twitter:description" content="Several AIs try different approaches to the same problem. A critic tries to break each answer. The one that survives wins." />
     <meta name="twitter:image" content="https://manyface.coey.dev/share.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -81,12 +81,12 @@
   <body>
     <div class="container">
       <div class="eyebrow">manyface</div>
-      <h1>adversarial parallel synthesis</h1>
-      <p>Race incompatible builders and hostile reviewers in isolation. The first artifact to survive the shared proof graph wins. Losers keep their failure receipts so nothing useful is thrown away.</p>
+      <h1>several AIs, one problem, one survivor</h1>
+      <p>Ask one AI to solve a problem and you get a confident answer — but you cannot tell if it is actually right. Manyface runs several AIs side by side, each trying a different approach, then puts every answer through the same tough tests. A critic AI actively tries to break each answer. The one that survives wins. You see why the polished-but-wrong answers lost.</p>
 
       <div class="gate">
         <h3>run a tournament</h3>
-        <p style="font-size:.875rem;margin-bottom:1rem">Launches 4 sorting candidates against 3 adversarial reviewers. The gate scores every artifact deterministically.</p>
+        <p style="font-size:.875rem;margin-bottom:1rem">Launches 4 different sorting attempts against 3 critics. Every answer goes through the same deterministic tests.</p>
         <button class="btn" id="runBtn">run tournament</button>
         <div id="status" style="margin-top:.75rem;font-family:'IBM Plex Mono',monospace;font-size:.8125rem;color:var(--muted)"></div>
         <div id="results" style="margin-top:1rem"></div>
@@ -94,19 +94,19 @@
       </div>
 
       <h2>how it works</h2>
-      <pre>claim
- ├─ Candidate A  (isolated cell) ──> artifact + self-tests
- ├─ Candidate B  (isolated cell) ──> artifact + self-tests
- ├─ Candidate C  (isolated cell) ──> artifact + self-tests
- └─ Adversary 1/2/3 ──> counterexamples
+<pre>problem
+  ├─ Attempt A  (isolated cell) ──> answer + self-tests
+  ├─ Attempt B  (isolated cell) ──> answer + self-tests
+  ├─ Attempt C  (isolated cell) ──> answer + self-tests
+  └─ Critic 1/2/3 ──> counterexamples
 
-        deterministic gate
+        deterministic tests
          pass / fail on every pair
-            |
-      winner (proof bundle)
-      losers (retained with counterexamples)</pre>
+             |
+       winner (with proof bundle)
+       losers (kept with counterexamples)</pre>
 
-      <h2>load-bearing primitives</h2>
+      <h2>what powers it</h2>
       <ul>
         <li><strong>Workflow</strong> — durable tournament lifecycle</li>
         <li><strong>Queues</strong> — fan-out for candidates and adversaries</li>
